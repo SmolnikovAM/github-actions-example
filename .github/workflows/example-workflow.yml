@@ -15,6 +15,9 @@ jobs:
           - os: ubuntu-20.04
             process_platform: "linux"
             process_arch: "x64"
+          - os: windows-latest
+            process_platform: "win32"
+            process_arch: "x64"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,8 +48,10 @@ jobs:
       - name: Rename Artifacts
         run: |
              mv ./release-${{ github.ref_name }}-linux-x64/release.txt ./release-${{ github.ref_name }}-linux-x64.txt
+             mv ./release-${{ github.ref_name }}-win32-x64/release.txt ./release-${{ github.ref_name }}-win32-x64.txt
       - name: Create Release
         uses: ncipollo/release-action@v1 # https://github.com/ncipollo/release-action
         with:
           name: Release ${{ github.ref_name }}
+          # https://github.com/SmolnikovAM/github-actions-example/releases/download/v1.0.15/release-v1.0.15-linux-x64.txt
           artifacts: "./release-*.txt"
