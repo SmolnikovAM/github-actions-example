@@ -55,13 +55,9 @@ jobs:
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-      - name: Upload Release linux x64 Asset
+      - name: Upload Release files
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-${{ github.ref_name }}-linux-x64/release.txt
-          asset_name: release-${{ github.ref_name }}-linux-x64.txt
-          asset_content_type: application/zip
+          files: |
+            ./release-${{ github.ref_name }}-linux-x64/release.txt
