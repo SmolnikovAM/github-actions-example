@@ -18,6 +18,9 @@ jobs:
           - os: windows-latest
             process_platform: "win32"
             process_arch: "x64"
+          - os: macos-latest
+            process_platform: "darwin"
+            process_arch: "intel"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -49,6 +52,7 @@ jobs:
         run: |
              mv ./release-${{ github.ref_name }}-linux-x64/release.txt ./release-${{ github.ref_name }}-linux-x64.txt
              mv ./release-${{ github.ref_name }}-win32-x64/release.txt ./release-${{ github.ref_name }}-win32-x64.txt
+             mv ./release-${{ github.ref_name }}-darwin-intel/release.txt ./release-${{ github.ref_name }}-darwin-intel.txt
       - name: Create Release
         uses: ncipollo/release-action@v1 # https://github.com/ncipollo/release-action
         with:
